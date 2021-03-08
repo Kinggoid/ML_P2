@@ -18,15 +18,16 @@ class Perceptron:
     def update(self, inputs, target):
         """In deze functie gaan we kijken of en hoeveel we onze weights en biassen willen aanpassen."""
         p_error = target - self.calculate_output(inputs)  # Wat is de error
-        self.errors.append(p_error)  # Voeg de error toe aan alle errors
+        self.errors.append(p_error ** 2)  # Voeg het kwadraat van de error toe aan alle errors
         update = self.learn_rate * p_error
         self.bias = update + self.bias
         x = [update * i for i in inputs]
         self.weights = [x[i] + self.weights[i] for i in range(0, len(inputs))]
 
-    def error(self, error):
-        """Berekenen de totale error van alle trainingvoorbeelden."""
-        return (sum(error) ** 2) / len(self.errors)
+    def error(self):
+        """Berekenen de totale error van deze neutron."""
+        print(self.errors)
+        return sum(self.errors) / len(self.errors)
 
     def __str__(self):
         """Informatie van de perceptron"""
